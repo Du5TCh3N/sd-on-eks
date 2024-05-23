@@ -1,5 +1,5 @@
 stackName: sdoneks
-modelBucketArn: arn:aws:s3:::dummy-bucket
+modelBucketArn: arn:aws-cn:s3:::sd-on-eks-model
 APIGW:
   stageName: dev
   throttle:
@@ -19,13 +19,50 @@ modelsRuntime:
         #  snapshotID: snap-0123456789
       provisioner:
         instanceType:
-        - g6.xlarge
-        - g6.2xlarge
+        - g4.xlarge
         capacityType:
           onDemand: true
           spot: true
     runtime:
+      inferenceApi:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inference-api # Image Repository of stable diffusion runtime.
+          tag: 45
+      queueAgent:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/queue-agent # Image Repository of queue agent.
+          tag: 9
       scaling:
         queueLength: 10
         minReplicaCount: 0
-        cooldownPeriod: 300
+        cooldownPeriod: 1200
+- name: inpaint-sdruntime
+  namespace: default
+  modelFilename: inpaint
+  dynamicModel: false
+  type: sdwebui
+  extraValues:
+    karpenter:
+      nodeTemplate:
+        amiFamily: Bottlerocket
+        # dataVolume:
+        #  snapshotID: snap-0123456789
+      provisioner:
+        instanceType:
+        - g4.xlarge
+        capacityType:
+          onDemand: true
+          spot: true
+    runtime:
+      inferenceApi:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-api # Image Repository of stable diffusion runtime.
+          tag: 15
+      queueAgent:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-queue-agent # Image Repository of queue agent.
+          tag: 1
+      scaling:
+        queueLength: 10
+        minReplicaCount: 0
+        cooldownPeriod: 1200
