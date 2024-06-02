@@ -1,5 +1,5 @@
 stackName: sdoneks
-modelBucketArn: arn:aws-cn:s3:::sd-on-eks-model
+modelBucketArn: arn:aws-cn:s3:::sd-on-eks
 APIGW:
   stageName: dev
   throttle:
@@ -19,19 +19,19 @@ modelsRuntime:
         #  snapshotID: snap-0123456789
       provisioner:
         instanceType:
-        - g4.xlarge
+        - g4dn.xlarge
         capacityType:
           onDemand: true
-          spot: true
+          spot: false
     runtime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inference-api # Image Repository of stable diffusion runtime.
-          tag: 45
+          tag: 53
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/queue-agent # Image Repository of queue agent.
-          tag: 9
+          tag: 14
       scaling:
         queueLength: 10
         minReplicaCount: 0
@@ -49,10 +49,10 @@ modelsRuntime:
         #  snapshotID: snap-0123456789
       provisioner:
         instanceType:
-        - g4.xlarge
+        - g4dn.xlarge
         capacityType:
           onDemand: true
-          spot: true
+          spot: false
     runtime:
       inferenceApi:
         image:
@@ -61,7 +61,67 @@ modelsRuntime:
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-queue-agent # Image Repository of queue agent.
-          tag: 1
+          tag: 2
+      scaling:
+        queueLength: 15
+        minReplicaCount: 0
+        cooldownPeriod: 1200
+- name: sdxl-sdruntime
+  namespace: default
+  modelFilename: sdxl
+  dynamicModel: false
+  type: sdwebui
+  extraValues:
+    karpenter:
+      nodeTemplate:
+        amiFamily: Bottlerocket
+        # dataVolume:
+        #  snapshotID: snap-0123456789
+      provisioner:
+        instanceType:
+        - g5.xlarge
+        capacityType:
+          onDemand: true
+          spot: false
+    runtime:
+      inferenceApi:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-api # Image Repository of stable diffusion runtime.
+          tag: 9
+      queueAgent:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
+          tag: 2
+      scaling:
+        queueLength: 10
+        minReplicaCount: 0
+        cooldownPeriod: 1200
+- name: sdxl-img2img-sdruntime
+  namespace: default
+  modelFilename: sdxl-img2img
+  dynamicModel: false
+  type: sdwebui
+  extraValues:
+    karpenter:
+      nodeTemplate:
+        amiFamily: Bottlerocket
+        # dataVolume:
+        #  snapshotID: snap-0123456789
+      provisioner:
+        instanceType:
+        - g5.xlarge
+        capacityType:
+          onDemand: true
+          spot: false
+    runtime:
+      inferenceApi:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-img2img-api # Image Repository of stable diffusion runtime.
+          tag: 2
+      queueAgent:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
+          tag: 2
       scaling:
         queueLength: 10
         minReplicaCount: 0
