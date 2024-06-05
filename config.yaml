@@ -31,7 +31,7 @@ modelsRuntime:
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/queue-agent # Image Repository of queue agent.
-          tag: 15
+          tag: 16
       scaling:
         queueLength: 10
         minReplicaCount: 0
