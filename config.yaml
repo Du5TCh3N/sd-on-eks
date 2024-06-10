@@ -27,7 +27,7 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inference-api # Image Repository of stable diffusion runtime.
-          tag: 58
+          tag: 59
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/queue-agent # Image Repository of queue agent.
@@ -79,7 +79,10 @@ modelsRuntime:
         #  snapshotID: snap-0123456789
       provisioner:
         instanceType:
-        - g5.xlarge
+        # - g5.xlarge
+        - g5.2xlarge
+        # - g5.4xlarge
+        # - g4dn.2xlarge
         capacityType:
           onDemand: true
           spot: false
@@ -87,7 +90,7 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-api # Image Repository of stable diffusion runtime.
-          tag: 10
+          tag: 26
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
