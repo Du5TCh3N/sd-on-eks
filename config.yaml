@@ -15,8 +15,8 @@ modelsRuntime:
     karpenter:
       nodeTemplate:
         amiFamily: Bottlerocket
-        # dataVolume:
-        #  snapshotID: snap-0123456789
+        dataVolume:
+         snapshotID: snap-00b3bc867f40fc8b0
       provisioner:
         instanceType:
         - g4dn.xlarge
@@ -57,7 +57,7 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-api # Image Repository of stable diffusion runtime.
-          tag: 17
+          tag: 18
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-queue-agent # Image Repository of queue agent.
@@ -80,8 +80,9 @@ modelsRuntime:
       provisioner:
         instanceType:
         # - g5.xlarge
+        - g5.4xlarge
         - g5.2xlarge
-        # - g5.4xlarge
+        - g5.8xlarge
         # - g4dn.2xlarge
         capacityType:
           onDemand: true
@@ -90,7 +91,7 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-api # Image Repository of stable diffusion runtime.
-          tag: 26
+          tag: 9
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
@@ -98,7 +99,7 @@ modelsRuntime:
       scaling:
         queueLength: 10
         minReplicaCount: 0
-        cooldownPeriod: 1200
+        cooldownPeriod: 600
 - name: sdxl-img2img-sdruntime
   namespace: default
   modelFilename: sdxl-img2img
