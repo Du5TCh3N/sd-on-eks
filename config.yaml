@@ -57,11 +57,11 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-api # Image Repository of stable diffusion runtime.
-          tag: 18
+          tag: 23
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-queue-agent # Image Repository of queue agent.
-          tag: 4
+          tag: 7
       scaling:
         queueLength: 15
         minReplicaCount: 0
@@ -80,8 +80,8 @@ modelsRuntime:
       provisioner:
         instanceType:
         # - g5.xlarge
-        - g5.4xlarge
         - g5.2xlarge
+        - g5.4xlarge
         - g5.8xlarge
         # - g4dn.2xlarge
         capacityType:
@@ -91,7 +91,7 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-api # Image Repository of stable diffusion runtime.
-          tag: 9
+          tag: 10
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
@@ -113,7 +113,9 @@ modelsRuntime:
         #  snapshotID: snap-0123456789
       provisioner:
         instanceType:
-        - g5.xlarge
+        - g5.2xlarge
+        - g5.4xlarge
+        - g5.8xlarge
         capacityType:
           onDemand: true
           spot: false
@@ -121,12 +123,12 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-img2img-api # Image Repository of stable diffusion runtime.
-          tag: 2
+          tag: 6
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
-          tag: 2
+          tag: 4
       scaling:
         queueLength: 10
         minReplicaCount: 0
-        cooldownPeriod: 1200
+        cooldownPeriod: 600
