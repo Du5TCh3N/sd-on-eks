@@ -36,7 +36,67 @@ modelsRuntime:
         queueLength: 10
         minReplicaCount: 0
         cooldownPeriod: 1200
+- name: sdruntime-dev
+  namespace: default
+  modelFilename: v1-5-pruned-emaonly.safetensors
+  dynamicModel: false
+  type: sdwebui
+  extraValues:
+    karpenter:
+      nodeTemplate:
+        amiFamily: Bottlerocket
+        dataVolume:
+         snapshotID: snap-00b3bc867f40fc8b0
+      provisioner:
+        instanceType:
+        - g4dn.xlarge
+        capacityType:
+          onDemand: true
+          spot: false
+    runtime:
+      inferenceApi:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inference-api # Image Repository of stable diffusion runtime.
+          tag: 59
+      queueAgent:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/queue-agent # Image Repository of queue agent.
+          tag: 16
+      scaling:
+        queueLength: 10
+        minReplicaCount: 0
+        cooldownPeriod: 1200
 - name: inpaint-sdruntime
+  namespace: default
+  modelFilename: inpaint
+  dynamicModel: false
+  type: sdwebui
+  extraValues:
+    karpenter:
+      nodeTemplate:
+        amiFamily: Bottlerocket
+        # dataVolume:
+        #  snapshotID: snap-0123456789
+      provisioner:
+        instanceType:
+        - g4dn.xlarge
+        capacityType:
+          onDemand: true
+          spot: false
+    runtime:
+      inferenceApi:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-api # Image Repository of stable diffusion runtime.
+          tag: 23
+      queueAgent:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-queue-agent # Image Repository of queue agent.
+          tag: 7
+      scaling:
+        queueLength: 15
+        minReplicaCount: 0
+        cooldownPeriod: 1200
+- name: inpaint-sdruntime-dev
   namespace: default
   modelFilename: inpaint
   dynamicModel: false
@@ -100,7 +160,73 @@ modelsRuntime:
         queueLength: 10
         minReplicaCount: 0
         cooldownPeriod: 600
+- name: sdxl-sdruntime-dev
+  namespace: default
+  modelFilename: sdxl
+  dynamicModel: false
+  type: sdwebui
+  extraValues:
+    karpenter:
+      nodeTemplate:
+        amiFamily: Bottlerocket
+        # dataVolume:
+        #  snapshotID: snap-0123456789
+      provisioner:
+        instanceType:
+        # - g5.xlarge
+        - g5.2xlarge
+        - g5.4xlarge
+        - g5.8xlarge
+        # - g4dn.2xlarge
+        capacityType:
+          onDemand: true
+          spot: false
+    runtime:
+      inferenceApi:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-api # Image Repository of stable diffusion runtime.
+          tag: 10
+      queueAgent:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
+          tag: 3
+      scaling:
+        queueLength: 10
+        minReplicaCount: 0
+        cooldownPeriod: 600
 - name: sdxl-img2img-sdruntime
+  namespace: default
+  modelFilename: sdxl-img2img
+  dynamicModel: false
+  type: sdwebui
+  extraValues:
+    karpenter:
+      nodeTemplate:
+        amiFamily: Bottlerocket
+        # dataVolume:
+        #  snapshotID: snap-0123456789
+      provisioner:
+        instanceType:
+        - g5.2xlarge
+        - g5.4xlarge
+        - g5.8xlarge
+        capacityType:
+          onDemand: true
+          spot: false
+    runtime:
+      inferenceApi:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-img2img-api # Image Repository of stable diffusion runtime.
+          tag: 6
+      queueAgent:
+        image:
+          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
+          tag: 4
+      scaling:
+        queueLength: 10
+        minReplicaCount: 0
+        cooldownPeriod: 600
+- name: sdxl-img2img-sdruntime-dev
   namespace: default
   modelFilename: sdxl-img2img
   dynamicModel: false
