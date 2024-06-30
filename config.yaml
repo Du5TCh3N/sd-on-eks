@@ -151,11 +151,11 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-api # Image Repository of stable diffusion runtime.
-          tag: 11
+          tag: 15
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
-          tag: 3
+          tag: 6
       scaling:
         queueLength: 10
         minReplicaCount: 0
@@ -185,76 +185,12 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-api # Image Repository of stable diffusion runtime.
-          tag: 11
+          tag: 15
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
-          tag: 3
+          tag: 6
       scaling:
         queueLength: 10
         minReplicaCount: 0
-        cooldownPeriod: 600
-- name: sdxl-img2img-sdruntime
-  namespace: default
-  modelFilename: sdxl-img2img
-  dynamicModel: false
-  type: sdwebui
-  extraValues:
-    karpenter:
-      nodeTemplate:
-        amiFamily: Bottlerocket
-        # dataVolume:
-        #  snapshotID: snap-0123456789
-      provisioner:
-        instanceType:
-        - g5.2xlarge
-        - g5.4xlarge
-        - g5.8xlarge
-        capacityType:
-          onDemand: true
-          spot: false
-    runtime:
-      inferenceApi:
-        image:
-          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-img2img-api # Image Repository of stable diffusion runtime.
-          tag: 14
-      queueAgent:
-        image:
-          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
-          tag: 4
-      scaling:
-        queueLength: 10
-        minReplicaCount: 0
-        cooldownPeriod: 600
-- name: sdxl-img2img-sdruntime-dev
-  namespace: default
-  modelFilename: sdxl-img2img
-  dynamicModel: false
-  type: sdwebui
-  extraValues:
-    karpenter:
-      nodeTemplate:
-        amiFamily: Bottlerocket
-        # dataVolume:
-        #  snapshotID: snap-0123456789
-      provisioner:
-        instanceType:
-        - g5.2xlarge
-        - g5.4xlarge
-        - g5.8xlarge
-        capacityType:
-          onDemand: true
-          spot: false
-    runtime:
-      inferenceApi:
-        image:
-          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-img2img-api # Image Repository of stable diffusion runtime.
-          tag: 14
-      queueAgent:
-        image:
-          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
-          tag: 4
-      scaling:
-        queueLength: 10
-        minReplicaCount: 0
-        cooldownPeriod: 600
+        cooldownPeriod: 900
