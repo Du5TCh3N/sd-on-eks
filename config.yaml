@@ -27,7 +27,7 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inference-api # Image Repository of stable diffusion runtime.
-          tag: 59
+          tag: 60
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/queue-agent # Image Repository of queue agent.
@@ -45,8 +45,8 @@ modelsRuntime:
     karpenter:
       nodeTemplate:
         amiFamily: Bottlerocket
-        dataVolume:
-         snapshotID: snap-00b3bc867f40fc8b0
+        # dataVolume:
+        #  snapshotID: snap-00b3bc867f40fc8b0
       provisioner:
         instanceType:
         - g4dn.xlarge
@@ -57,46 +57,16 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inference-api # Image Repository of stable diffusion runtime.
-          tag: 59
+          tag: 60
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/queue-agent # Image Repository of queue agent.
           tag: 16
       scaling:
-        queueLength: 10
+        queueLength: 30
         minReplicaCount: 0
         cooldownPeriod: 1200
 - name: inpaint-sdruntime
-  namespace: default
-  modelFilename: inpaint
-  dynamicModel: false
-  type: sdwebui
-  extraValues:
-    karpenter:
-      nodeTemplate:
-        amiFamily: Bottlerocket
-        # dataVolume:
-        #  snapshotID: snap-0123456789
-      provisioner:
-        instanceType:
-        - g4dn.xlarge
-        capacityType:
-          onDemand: true
-          spot: false
-    runtime:
-      inferenceApi:
-        image:
-          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-api # Image Repository of stable diffusion runtime.
-          tag: 23
-      queueAgent:
-        image:
-          repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/inpaint-queue-agent # Image Repository of queue agent.
-          tag: 7
-      scaling:
-        queueLength: 15
-        minReplicaCount: 0
-        cooldownPeriod: 1200
-- name: inpaint-sdruntime-dev
   namespace: default
   modelFilename: inpaint
   dynamicModel: false
@@ -151,7 +121,7 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-api # Image Repository of stable diffusion runtime.
-          tag: 15
+          tag: 16
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
@@ -159,7 +129,7 @@ modelsRuntime:
       scaling:
         queueLength: 10
         minReplicaCount: 0
-        cooldownPeriod: 600
+        cooldownPeriod: 900
 - name: sdxl-sdruntime-dev
   namespace: default
   modelFilename: sdxl
@@ -185,12 +155,12 @@ modelsRuntime:
       inferenceApi:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-api # Image Repository of stable diffusion runtime.
-          tag: 16
+          tag: 18
       queueAgent:
         image:
           repository: 576159396516.dkr.ecr.cn-north-1.amazonaws.com.cn/huiyoujia/sdxl-queue-agent # Image Repository of queue agent.
           tag: 6
       scaling:
-        queueLength: 10
+        queueLength: 30
         minReplicaCount: 0
-        cooldownPeriod: 900
+        cooldownPeriod: 300
